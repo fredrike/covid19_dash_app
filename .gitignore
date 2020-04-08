@@ -1,3 +1,6 @@
 .venv
 *.zip
 .ipynb_checkpoints
+webapp/venv
+webapp/__pycache__
+webapp/.azure
