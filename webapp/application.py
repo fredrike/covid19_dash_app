@@ -168,6 +168,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
+app.title = "COVID-19"
 app.layout = html.Div([
     html.Label("Filter by first case."),
     dcc.Slider(id='filter-limit',
@@ -230,9 +231,10 @@ def callback_right(country, limit):
 def callback_big(country_l, country_r, limit):
     return plotcountries(country_l, country_r, limit)
 
-application = app.server
 
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+else:
+    app = app.server
 
