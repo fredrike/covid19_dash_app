@@ -159,10 +159,14 @@ CountriesList=['Sweden','Norway', 'Denmark', 'Spain', 'Italy', 'Germany','US','F
 
 
 import dash_core_components as dcc
+# import flask
+
+# server = flask.Flask(__name__)
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
 
 app.layout = html.Div([
     html.Label("Filter by first case."),
@@ -209,14 +213,14 @@ app.layout = html.Div([
     [dash.dependencies.Input('l_country', 'value'),
     dash.dependencies.Input('filter-limit', 'value'),])
 def callback_left(country, limit):
-    return plotcountry(country, limit)
+    return plotcountry(country, limit, chartcol=px.colors.qualitative.Plotly[0])
 
 @app.callback(
     dash.dependencies.Output('r_graph', 'figure'),
     [dash.dependencies.Input('r_country', 'value'),
     dash.dependencies.Input('filter-limit', 'value'),])
 def callback_right(country, limit):
-    return plotcountry(country, limit)
+    return plotcountry(country, limit, chartcol=px.colors.qualitative.Plotly[1])
 
 @app.callback(
     dash.dependencies.Output('big_graph', 'figure'),
@@ -230,5 +234,5 @@ application = app.server
 
 
 if __name__ == '__main__':
-    application.run(debug=True, host='0.0.0.0', port='5000')
+    app.run_server(debug=True)
 
